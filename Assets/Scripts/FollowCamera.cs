@@ -5,9 +5,10 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     public GameObject player;
+    public Vector3 offset;
 
     private void Update()
     {
-        transform.position = player.transform.position;
+        transform.position = player.transform.position + offset;
     }
 }
