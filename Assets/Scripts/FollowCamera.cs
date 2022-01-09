@@ -20,7 +20,6 @@ public class FollowCamera : MonoBehaviour
         if(Vector3.Dot(currentOffsetVec, playerVelocity) > 0 && currentOffset > offsetGap)
         {
             this.transform.position = player.transform.position + offsetGoal - offsetGap * currentOffsetVec.normalized;
-            Debug.Log("aaa");
         }
     }
 }

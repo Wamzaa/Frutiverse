@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = this.GetComponent<Rigidbody2D>();
         groundDetectorMask = LayerMask.GetMask("Default");
+
+        DontDestroyOnLoad(this);
+        MainManager.Instance.player = this.gameObject;
     }
 
     private void Update()
