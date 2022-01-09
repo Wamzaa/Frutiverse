@@ -5,13 +5,22 @@ using UnityEngine;
 public class FollowCamera : MonoBehaviour
 {
     public GameObject player;
-    public Vector3 offset;
-
-    private Vector3 camVelocity = Vector3.zero;
+    public Vector3 offsetGoal;
+    public float offsetGap;
 
     private void Update()
     {
-        Vector3 targetPosition = player.transform.position + offset;
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref camVelocity, 0.1f);
+        Vector3 playerVelocity = player.GetComponent<Rigidbody2D>().velocity;
+        playerVelocity = playerVelocity.normalized;
+
+        Vector3 currentOffsetVec = player.transform.position + offsetGoal - this.transform.position;
+        currentOffsetVec.z = 0.0f;
+        float currentOffset = currentOffsetVec.magnitude;
+
+        if(Vector3.Dot(currentOffsetVec, playerVelocity) > 0 && currentOffset > offsetGap)
+        {
+            this.transform.position = player.transform.position + offsetGoal - offsetGap * currentOffsetVec.normalized;
+            Debug.Log("aaa");
+        }
     }
 }
