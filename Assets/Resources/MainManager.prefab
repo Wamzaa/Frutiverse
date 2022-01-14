@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  uiManager: {fileID: 0}
+  maxHealth: 5
+  currentHealth: 0

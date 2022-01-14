@@ -11,8 +11,13 @@ public class MenuManager : MonoBehaviour
         DontDestroyOnLoad(player);
         GameObject mainManager = Instantiate(Resources.Load<GameObject>("MainManager"));
         DontDestroyOnLoad(mainManager);
+        GameObject uiManager = Instantiate(Resources.Load<GameObject>("UIManager"));
+        DontDestroyOnLoad(uiManager);
 
         MainManager.Instance.player = player;
+        MainManager.Instance.uiManager = uiManager.GetComponent<UIManager>();
+        uiManager.GetComponent<UIManager>().InitHealthBar();
+
         MainManager.Instance.ChangeScene("TestScene", 0);
         
     }

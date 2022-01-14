@@ -19,6 +19,11 @@ public class Enemy : MonoBehaviour
         {
             TakeDamage(10);
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            MainManager.Instance.TakeDamage(1);
+        }
     }
 
     public void TakeDamage(int damage)

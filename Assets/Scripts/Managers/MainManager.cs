@@ -8,6 +8,11 @@ public class MainManager : MonoBehaviour
     public static MainManager Instance;
 
     public GameObject player;
+    public UIManager uiManager;
+    public int maxHealth;
+
+    [HideInInspector]
+    public int currentHealth;
 
     private void Awake()
     {
@@ -23,6 +28,7 @@ public class MainManager : MonoBehaviour
 
     private void Start()
     {
+        currentHealth = maxHealth;
         DontDestroyOnLoad(this);
     }
 
@@ -38,6 +44,21 @@ public class MainManager : MonoBehaviour
 
         player.transform.position = MapManager.Instance.GetSpawn(spawnId);
         Camera.main.GetComponent<FollowCamera>().player = MainManager.Instance.player;
+
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if(currentHealth <= 0)
+        {
+            GameOver();
+        }
+        uiManager.UpdateHealthBar();
+    }
+
+    public void GameOver()
+    {
 
     }
 }
