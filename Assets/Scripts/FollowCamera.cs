@@ -10,16 +10,19 @@ public class FollowCamera : MonoBehaviour
 
     private void Update()
     {
-        Vector3 playerVelocity = player.GetComponent<Rigidbody2D>().velocity;
-        playerVelocity = playerVelocity.normalized;
-
-        Vector3 currentOffsetVec = player.transform.position + offsetGoal - this.transform.position;
-        currentOffsetVec.z = 0.0f;
-        float currentOffset = currentOffsetVec.magnitude;
-
-        if(Vector3.Dot(currentOffsetVec, playerVelocity) > 0 && currentOffset > offsetGap)
+        if(player != null)
         {
-            this.transform.position = player.transform.position + offsetGoal - offsetGap * currentOffsetVec.normalized;
+            Vector3 playerVelocity = player.GetComponent<Rigidbody2D>().velocity;
+            playerVelocity = playerVelocity.normalized;
+
+            Vector3 currentOffsetVec = player.transform.position + offsetGoal - this.transform.position;
+            currentOffsetVec.z = 0.0f;
+            float currentOffset = currentOffsetVec.magnitude;
+
+            if (Vector3.Dot(currentOffsetVec, playerVelocity) > 0 && currentOffset > offsetGap)
+            {
+                this.transform.position = player.transform.position + offsetGoal - offsetGap * currentOffsetVec.normalized;
+            }
         }
     }
 }

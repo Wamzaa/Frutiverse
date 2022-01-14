@@ -37,6 +37,7 @@ public class MainManager : MonoBehaviour
         yield return asyncOp;
 
         player.transform.position = MapManager.Instance.GetSpawn(spawnId);
+        Camera.main.GetComponent<FollowCamera>().player = MainManager.Instance.player;
 
     }
 }
