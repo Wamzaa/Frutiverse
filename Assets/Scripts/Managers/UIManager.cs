@@ -6,13 +6,32 @@ public class UIManager : MonoBehaviour
 {
     public GameObject healthPanel;
     public GameObject lifePrefab;
+    public GameObject menuUI;
+    public GameObject inventoryUI;
 
     private int currentHealth;
     private List<GameObject> lifes;
 
+    private bool menuVisible;
+    private bool inventoryVisible;
+
     private void Awake()
     {
         lifes = new List<GameObject>();
+        menuVisible = false;
+        inventoryVisible = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            OpenInventory(!inventoryVisible);
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            OpenMenu(!menuVisible);
+        }
     }
 
     public void InitHealthBar()
@@ -36,5 +55,29 @@ public class UIManager : MonoBehaviour
             lifes[j].transform.GetChild(1).gameObject.SetActive(false);
         }
 
+    }
+
+    public void OpenInventory(bool open)
+    {
+        if (open)
+        {
+            menuVisible = false;
+            menuUI.SetActive(false);
+        }
+        
+        inventoryVisible = open;
+        inventoryUI.SetActive(open);
+    }
+
+    public void OpenMenu(bool open)
+    {
+        if (open)
+        {
+            inventoryVisible = false;
+            inventoryUI.SetActive(false);
+        }
+
+        menuVisible = open;
+        menuUI.SetActive(open);
     }
 }
