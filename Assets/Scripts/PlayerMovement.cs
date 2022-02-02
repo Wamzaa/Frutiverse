@@ -37,6 +37,12 @@ public class PlayerMovement : MonoBehaviour
         {
             isJumping = true;
         }
+
+        if (!isOnGround)
+        {
+            float jumpDirCoeff = 0.3f;
+            horizontalMovement = jumpDirCoeff * horizontalMovement + (1.0f-jumpDirCoeff) * rb.velocity.x;
+        }
     }
 
     private void FixedUpdate()
