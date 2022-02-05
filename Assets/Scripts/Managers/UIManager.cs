@@ -8,12 +8,14 @@ public class UIManager : MonoBehaviour
     public GameObject lifePrefab;
     public GameObject menuUI;
     public GameObject inventoryUI;
+    public GameObject gameOverUI;
 
     private int currentHealth;
     private List<GameObject> lifes;
 
     private bool menuVisible;
     private bool inventoryVisible;
+    private bool gameOverVisible;
 
     private void Awake()
     {
@@ -59,7 +61,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenInventory(bool open)
     {
-        if (open)
+        if (open && gameOverVisible)
         {
             menuVisible = false;
             menuUI.SetActive(false);
@@ -71,7 +73,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenMenu(bool open)
     {
-        if (open)
+        if (open && !gameOverVisible)
         {
             inventoryVisible = false;
             inventoryUI.SetActive(false);
@@ -79,5 +81,27 @@ public class UIManager : MonoBehaviour
 
         menuVisible = open;
         menuUI.SetActive(open);
+    }
+
+    public void GameOver()
+    {
+        inventoryVisible = false;
+        menuVisible = false;
+        inventoryUI.SetActive(false);
+        menuUI.SetActive(false);
+        gameOverVisible = true;
+        gameOverUI.SetActive(true);
+    }
+
+    public void Respawn()
+    {
+        gameOverVisible = false;
+        gameOverUI.SetActive(false);
+        MainManager.Instance.Respawn();
+    }
+
+    public void GoBackToMainMenu()
+    {
+        StartCoroutine(MainManager.Instance.ChangeSceneToMainMenu());
     }
 }

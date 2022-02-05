@@ -47,6 +47,16 @@ public class MainManager : MonoBehaviour
 
     }
 
+    public IEnumerator ChangeSceneToMainMenu()
+    {
+        AsyncOperation asyncOp = SceneManager.LoadSceneAsync("MainMenu");
+        yield return asyncOp;
+
+        Destroy(player);
+        Destroy(uiManager.gameObject);
+        Destroy(this.gameObject);
+    }
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -59,6 +69,13 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
+        uiManager.GameOver();
+        player.SetActive(false);
+    }
 
+    public void Respawn()
+    {
+        currentHealth = maxHealth;
+        player.SetActive(true);
     }
 }
