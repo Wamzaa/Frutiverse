@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     public GameObject healthPanel;
+    public Text moneyText;
     public GameObject lifePrefab;
     public GameObject menuUI;
     public GameObject inventoryUI;
@@ -57,6 +59,12 @@ public class UIManager : MonoBehaviour
             lifes[j].transform.GetChild(1).gameObject.SetActive(false);
         }
 
+    }
+
+    public void UpdateMoneyText()
+    {
+        int currentMoney = MainManager.Instance.currentMoney;
+        moneyText.text = currentMoney.ToString();
     }
 
     public void OpenInventory(bool open)

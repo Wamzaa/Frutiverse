@@ -14,6 +14,9 @@ public class MainManager : MonoBehaviour
     [HideInInspector]
     public int currentHealth;
 
+    [HideInInspector]
+    public int currentMoney;
+
     private void Awake()
     {
         if (Instance == null)
@@ -29,6 +32,7 @@ public class MainManager : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        currentMoney = 0;
         DontDestroyOnLoad(this);
     }
 
@@ -76,6 +80,13 @@ public class MainManager : MonoBehaviour
     public void Respawn()
     {
         currentHealth = maxHealth;
+        uiManager.UpdateHealthBar();
         player.SetActive(true);
+    }
+
+    public void PickUpCoin(int value)
+    {
+        currentMoney += value;
+        uiManager.UpdateMoneyText();
     }
 }
