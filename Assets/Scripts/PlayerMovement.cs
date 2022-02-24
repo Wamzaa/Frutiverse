@@ -30,7 +30,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed;
+        if (MainManager.Instance.GetCanMove())
+        {
+            horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed;
+        }
+        else
+        {
+            horizontalMovement = 0.0f;
+        }
 
         isOnGround = Physics2D.OverlapCircle(groundDetectorTransform.position, groundDetectorRadius, groundDetectorMask); 
         if (Input.GetKeyDown(ControlsDictionary.Instance.jumpButtonKey) && isOnGround)

@@ -11,6 +11,7 @@ public class ControlsDictionary : MonoBehaviour
     public string attackButtonKey;
     public string menuButtonKey;
     public string inventoryButtonKey;
+    public string interactButtonKey;
 
     private string jsonPath;
 
@@ -40,6 +41,7 @@ public class ControlsDictionary : MonoBehaviour
         attackButtonKey = "f";
         menuButtonKey = "p";
         inventoryButtonKey = "i";
+        interactButtonKey = "e";
     }
 
     public void FillKeysFromJson()
@@ -68,6 +70,11 @@ public class ControlsDictionary : MonoBehaviour
             {
                 inventoryButtonKey = controls.inventoryButtonKey;
             }
+            
+            if (controls.interactButtonKey != null)
+            {
+                interactButtonKey = controls.interactButtonKey;
+            }
         }
 
         ControlsData newControls = new ControlsData();
@@ -75,6 +82,7 @@ public class ControlsDictionary : MonoBehaviour
         newControls.attackButtonKey = attackButtonKey;
         newControls.menuButtonKey = menuButtonKey;
         newControls.inventoryButtonKey = inventoryButtonKey;
+        newControls.interactButtonKey = interactButtonKey;
 
         string json = JsonUtility.ToJson(newControls);
         Debug.Log(jsonPath);

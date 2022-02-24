@@ -10,4 +10,5 @@ public class ControlsData
     public string attackButtonKey;
     public string menuButtonKey;
     public string inventoryButtonKey;
+    public string interactButtonKey;
 }

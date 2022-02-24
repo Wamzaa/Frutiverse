@@ -17,6 +17,8 @@ public class MainManager : MonoBehaviour
     [HideInInspector]
     public int currentMoney;
 
+    private bool canMove;
+
     private void Awake()
     {
         if (Instance == null)
@@ -33,7 +35,18 @@ public class MainManager : MonoBehaviour
     {
         currentHealth = maxHealth;
         currentMoney = 0;
+        canMove = true;
         DontDestroyOnLoad(this);
+    }
+
+    public bool GetCanMove()
+    {
+        return canMove;
+    }
+
+    public void SetCanMove(bool _canMove) 
+    {
+        canMove = _canMove;
     }
 
     public void ChangeScene(string sceneName, int spawnId)

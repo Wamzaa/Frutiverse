@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public GameObject healthPanel;
     public Text moneyText;
+    public GameObject speechPanel;
+    public Text speechText;
     public GameObject lifePrefab;
     public GameObject menuUI;
     public GameObject inventoryUI;
@@ -18,12 +20,14 @@ public class UIManager : MonoBehaviour
     private bool menuVisible;
     private bool inventoryVisible;
     private bool gameOverVisible;
+    private bool speechVisible;
 
     private void Awake()
     {
         lifes = new List<GameObject>();
         menuVisible = false;
         inventoryVisible = false;
+        speechVisible = false;
     }
 
     private void Update()
@@ -36,6 +40,11 @@ public class UIManager : MonoBehaviour
         {
             OpenMenu(!menuVisible);
         }
+    }
+
+    public bool GetSpeechVisible()
+    {
+        return speechVisible;
     }
 
     public void InitHealthBar()
@@ -65,6 +74,14 @@ public class UIManager : MonoBehaviour
     {
         int currentMoney = MainManager.Instance.currentMoney;
         moneyText.text = currentMoney.ToString();
+    }
+
+    public void UpdateSpeech(bool isVisible, string newSpeech)
+    {
+        speechPanel.SetActive(isVisible);
+        speechText.text = newSpeech;
+        speechVisible = isVisible;
+        MainManager.Instance.SetCanMove(!isVisible);
     }
 
     public void OpenInventory(bool open)
