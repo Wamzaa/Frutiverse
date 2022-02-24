@@ -26,11 +26,11 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(ControlsDictionary.Instance.inventoryButtonKey))
         {
             OpenInventory(!inventoryVisible);
         }
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(ControlsDictionary.Instance.menuButtonKey))
         {
             OpenMenu(!menuVisible);
         }
@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenInventory(bool open)
     {
-        if (open && gameOverVisible)
+        if (open && !gameOverVisible)
         {
             menuVisible = false;
             menuUI.SetActive(false);

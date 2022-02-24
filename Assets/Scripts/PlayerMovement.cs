@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed;
 
         isOnGround = Physics2D.OverlapCircle(groundDetectorTransform.position, groundDetectorRadius, groundDetectorMask); 
-        if (Input.GetButtonDown("Jump") && isOnGround)
+        if (Input.GetKeyDown(ControlsDictionary.Instance.jumpButtonKey) && isOnGround)
         {
             isJumping = true;
         }
@@ -55,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(new Vector2(0.0f, jumpForce));
             isJumping = false;
-            Debug.Log("test");
         }
     }
 
