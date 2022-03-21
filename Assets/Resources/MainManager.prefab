@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6112851476861505377}
   - component: {fileID: 6112851476861505376}
+  - component: {fileID: 1018877584974637621}
   m_Layer: 0
   m_Name: MainManager
   m_TagString: Untagged
@@ -47,3 +48,16 @@ MonoBehaviour:
   uiManager: {fileID: 0}
   maxHealth: 5
   currentHealth: 0
+  currentMoney: 0
+--- !u!114 &1018877584974637621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6112851476861505439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de38c954738776e46913cc840e3ec630, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

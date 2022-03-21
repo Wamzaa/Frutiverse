@@ -16,11 +16,11 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Update()
     {
-        bool attackInput = Input.GetKeyDown(ControlsDictionary.Instance.attackButtonKey);
+        /*bool attackInput = Input.GetKeyDown(ControlsDictionary.Instance.attackButtonKey);
         if(!isAttacking && attackInput)
         {
             StartCoroutine(Attack());
-        }
+        }*/
     }
 
     IEnumerator Attack()

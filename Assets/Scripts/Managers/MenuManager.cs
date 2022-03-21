@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    public GameObject optionsWindow;
+
     private void Awake()
     {
         Init();
@@ -12,10 +14,7 @@ public class MenuManager : MonoBehaviour
 
     public void Init()
     {
-        GameObject controlsDictionaryObject = new GameObject("ControlsDictionary");
-        ControlsDictionary controlsDictionary = controlsDictionaryObject.AddComponent<ControlsDictionary>();
-        controlsDictionary.Init();
-        DontDestroyOnLoad(controlsDictionaryObject);
+
     }
 
     public void Play()
@@ -32,6 +31,16 @@ public class MenuManager : MonoBehaviour
         uiManager.GetComponent<UIManager>().InitHealthBar();
 
         MainManager.Instance.ChangeScene("TestScene", 0);
+    }
+
+    public void OpenOptions(bool show)
+    {
+        optionsWindow.SetActive(show);
+    }
+
+    public void RebindButtonClicked()
+    {
+        //ControlsDictionary.Instance.StartRebindingOperation();
     }
 
     public void QuitApplication()

@@ -32,14 +32,14 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(ControlsDictionary.Instance.inventoryButtonKey))
+        /*if (Input.GetKeyDown(ControlsDictionary.Instance.inventoryButtonKey))
         {
             OpenInventory(!inventoryVisible);
         }
         if (Input.GetKeyDown(ControlsDictionary.Instance.menuButtonKey))
         {
             OpenMenu(!menuVisible);
-        }
+        }*/
     }
 
     public bool GetSpeechVisible()

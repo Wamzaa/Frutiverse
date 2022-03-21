@@ -12,10 +12,10 @@ public class InteractableCharacter : MonoBehaviour
         if((MainManager.Instance.player.transform.position - this.transform.position).magnitude < interactDistance)
         {
             interactIndication.SetActive(true);
-            if (Input.GetKeyDown(ControlsDictionary.Instance.interactButtonKey))
+            /*if (Input.GetKeyDown(ControlsDictionary.Instance.interactButtonKey))
             {
                 Interact();
-            }
+            }*/
         }
         else
         {

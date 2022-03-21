@@ -6,9 +6,20 @@ using UnityEngine;
 [Serializable]
 public class ControlsData
 {
-    public string jumpButtonKey;
-    public string attackButtonKey;
-    public string menuButtonKey;
-    public string inventoryButtonKey;
-    public string interactButtonKey;
+    public ActionKeys jumpKeys;
+    public ActionKeys attackKeys;
+    public ActionKeys interactKeys;
+    public ActionKeys menuKeys;
+    public ActionKeys inventoryKeys;
+
+    public string moveLeftKeyboardKey;
+    public string moveRightKeyboardKey;
+    public string moveGamepadKey;
+}
+
+[Serializable]
+public class ActionKeys
+{
+    public string keyboardKey;
+    public string gamepadKey;
 }

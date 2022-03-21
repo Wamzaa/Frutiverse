@@ -40,10 +40,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         isOnGround = Physics2D.OverlapCircle(groundDetectorTransform.position, groundDetectorRadius, groundDetectorMask); 
-        if (Input.GetKeyDown(ControlsDictionary.Instance.jumpButtonKey) && isOnGround)
+        /*if (Input.GetKeyDown(ControlsDictionary.Instance.jumpButtonKey) && isOnGround)
         {
             isJumping = true;
-        }
+        }*/
 
         if (!isOnGround)
         {
