@@ -372,7 +372,24 @@ public class ControlsManager : MonoBehaviour
         operation.Dispose();
         playerControls.Enable();
 
-        SetActionPath(actionDefinition, currentAction.bindings[bindingIndex].overridePath);
+        string[] overridePath = currentAction.bindings[bindingIndex].overridePath.Split('/');
+        string controllerType = overridePath[0];
+        if((controllerType == "<Keyboard>" && actionDef[1] != "keyboard") || (controllerType == "<Gamepad>" && actionDef[1] != "gamepad"))
+        {
+            string oldPath = currentAction.bindings[bindingIndex].path;
+            currentAction.ChangeBinding(bindingIndex).Erase();
+            currentAction.AddBinding(GetActionPath(actionDefinition));
+            if(bindingIndex == 0 && currentAction.bindings.Count > 1)
+            {
+                string oldOtherPath = currentAction.bindings[0].path;
+                currentAction.ChangeBinding(0).Erase();
+                currentAction.AddBinding(oldOtherPath);
+            }
+            Debug.Log("WARNING :: Binding invalid : " + controllerType + " binding can't be used here. Use " + actionDef[1] + "instead");
+        }
+
+        Debug.Log(" hsdgshdg    :   " + currentAction.bindings[bindingIndex].path + " //// " + currentAction.bindings[bindingIndex].overridePath);
+        SetActionPath(actionDefinition, currentAction.bindings[bindingIndex].effectivePath);
         controlsChangedEvent.Invoke();
 
         string json = JsonUtility.ToJson(controlsData);
