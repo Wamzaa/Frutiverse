@@ -41,7 +41,7 @@ public class ControlsManager : MonoBehaviour
 
     public string GetActionPath(string actionDefinition)
     {
-        if(actionDefinition == "jump-keyboard")
+        if (actionDefinition == "jump-keyboard")
         {
             return (controlsData.jumpKeys.keyboardKey);
         }
@@ -101,6 +101,67 @@ public class ControlsManager : MonoBehaviour
         return ("");
     }
 
+    public void SetActionPath(string actionDefinition, string newBinding)
+    {
+        if (actionDefinition == "jump-keyboard")
+        {
+            controlsData.jumpKeys.keyboardKey = newBinding;
+        }
+        if (actionDefinition == "jump-gamepad")
+        {
+            controlsData.jumpKeys.gamepadKey = newBinding;
+        }
+
+        if (actionDefinition == "attack-keyboard")
+        {
+            controlsData.attackKeys.keyboardKey = newBinding;
+        }
+        if (actionDefinition == "attack-gamepad")
+        {
+            controlsData.attackKeys.gamepadKey = newBinding;
+        }
+
+        if (actionDefinition == "interact-keyboard")
+        {
+            controlsData.interactKeys.keyboardKey = newBinding;
+        }
+        if (actionDefinition == "interact-gamepad")
+        {
+            controlsData.interactKeys.gamepadKey = newBinding;
+        }
+
+        if (actionDefinition == "menu-keyboard")
+        {
+            controlsData.menuKeys.keyboardKey = newBinding;
+        }
+        if (actionDefinition == "menu-gamepad")
+        {
+            controlsData.menuKeys.gamepadKey = newBinding;
+        }
+
+        if (actionDefinition == "inventory-keyboard")
+        {
+            controlsData.inventoryKeys.keyboardKey = newBinding;
+        }
+        if (actionDefinition == "inventory-gamepad")
+        {
+            controlsData.inventoryKeys.gamepadKey = newBinding;
+        }
+
+        if (actionDefinition == "moveLeft-keyboard")
+        {
+            controlsData.moveLeftKeyboardKey = newBinding;
+        }
+        if (actionDefinition == "moveRight-keyboard")
+        {
+            controlsData.moveRightKeyboardKey = newBinding;
+        }
+        if (actionDefinition == "move-gamepad")
+        {
+            controlsData.moveGamepadKey = newBinding;
+        }
+    }
+
     #endregion
 
     #region Dictionary Initialization
@@ -144,6 +205,7 @@ public class ControlsManager : MonoBehaviour
             savedControls = JsonUtility.FromJson<ControlsData>(file);
         }
         //jump
+
         if (savedControls.jumpKeys.keyboardKey == "")
         {
             savedControls.jumpKeys.keyboardKey = playerControls.Gameplay.Jump.bindings[0].path;
@@ -205,7 +267,6 @@ public class ControlsManager : MonoBehaviour
         //Update controlsData from savedControls
 
         controlsData = savedControls;
-        Debug.Log("INVOKE !!!");
         controlsChangedEvent.Invoke();
 
         //Update InputActions from controlsData
@@ -244,18 +305,79 @@ public class ControlsManager : MonoBehaviour
 
     #region Rebinding Operations
 
-    /*public void StartRebindingOperation()
+    public InputAction GetCurrentAction(string def)
     {
-        playerControls.Disable();
-        operation = playerControls.Gameplay.JumpKeyboard.PerformInteractiveRebinding().WithControlsExcluding("Mouse").OnComplete(op => this.RebindingCompleted()).Start();
+        if (def == "jump")
+        {
+            return playerControls.Gameplay.Jump;
+        }
+        if (def == "attack")
+        {
+            return playerControls.Gameplay.Attack;
+        }
+        if (def == "interact")
+        {
+            return playerControls.Gameplay.Interact;
+        }
+        if (def == "menu")
+        {
+            return playerControls.Gameplay.OpenMenu;
+        }
+        if (def == "inventory")
+        {
+            return playerControls.Gameplay.OpenMenu;
+        }
+        if (def == "moveLeft")
+        {
+            return playerControls.Gameplay.MoveLeftKeyboard;
+        }
+        if (def == "moveRight")
+        {
+            return playerControls.Gameplay.MoveRightKeyboard;
+        }
+        if (def == "move")
+        {
+            return playerControls.Gameplay.MoveGamepad;
+        }
+        return null;
     }
 
-    public void RebindingCompleted()
+    public void StartRebindingOperation(string actionDefinition)
     {
-        Debug.Log("Rebind completed : " + playerControls.Gameplay.JumpKeyboard.bindings[0].overridePath);
+        string[] actionDef = actionDefinition.Split('-');
+
+        playerControls.Disable();
+        InputAction currentAction = GetCurrentAction(actionDef[0]);
+
+        int bindingIndex = 0;
+        if (actionDef[1] == "gamepad" && actionDefinition != "move-gamepad")
+        {
+            bindingIndex = 1;
+        }
+
+        operation = currentAction.PerformInteractiveRebinding(bindingIndex).WithControlsExcluding("Mouse").OnComplete(op => this.RebindingCompleted(actionDefinition)).Start();
+    }
+
+    public void RebindingCompleted(string actionDefinition)
+    {
+        string[] actionDef = actionDefinition.Split('-');
+        InputAction currentAction = GetCurrentAction(actionDef[0]);
+        int bindingIndex = 0;
+        if (actionDef[1] == "gamepad" && actionDefinition != "move-gamepad")
+        {
+            bindingIndex = 1;
+        }
+
+        Debug.Log("Rebind completed : " + currentAction.bindings[bindingIndex].overridePath);
         operation.Dispose();
         playerControls.Enable();
-    }*/
+
+        SetActionPath(actionDefinition, currentAction.bindings[bindingIndex].overridePath);
+        controlsChangedEvent.Invoke();
+
+        string json = JsonUtility.ToJson(controlsData);
+        File.WriteAllText(jsonPath, json);
+    }
 
     #endregion
 

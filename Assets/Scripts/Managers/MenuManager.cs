@@ -38,11 +38,6 @@ public class MenuManager : MonoBehaviour
         optionsWindow.SetActive(show);
     }
 
-    public void RebindButtonClicked()
-    {
-        //ControlsDictionary.Instance.StartRebindingOperation();
-    }
-
     public void QuitApplication()
     {
         Application.Quit();

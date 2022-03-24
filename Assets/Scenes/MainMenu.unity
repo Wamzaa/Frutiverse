@@ -221,9 +221,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 53874304}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -422,7 +422,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &224239004
 GameObject:
@@ -522,9 +522,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 224239006}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -670,9 +670,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 249819225}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -951,9 +951,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 394096314}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1419,9 +1419,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 478066221}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1814,9 +1814,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 616609206}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2006,9 +2006,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 808675165}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2233,9 +2233,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 848574258}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2446,9 +2446,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 984106981}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2687,9 +2687,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 1067760011}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2831,7 +2831,7 @@ RectTransform:
   - {fileID: 1666415867}
   - {fileID: 596483827}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2936,9 +2936,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 1117252368}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3163,9 +3163,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 1240628305}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3523,9 +3523,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 673888880}
-        m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
-        m_MethodName: RebindButtonClicked
+      - m_Target: {fileID: 1346604720}
+        m_TargetAssemblyTypeName: RebindingButton, Assembly-CSharp
+        m_MethodName: RebindingClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

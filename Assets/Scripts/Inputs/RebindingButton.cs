@@ -11,14 +11,12 @@ public class RebindingButton : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Register");
         ControlsManager.Instance.AddListener(UpdateButtonText);
         UpdateButtonText();
     }
 
     public void UpdateButtonText()
     {
-        Debug.Log("Lol");
         string controlPath = ControlsManager.Instance.GetActionPath(actionPath);
         if(controlPath != "")
         {
@@ -28,5 +26,10 @@ public class RebindingButton : MonoBehaviour
         {
             Debug.LogError("Bad ActionPath --- no bindings");
         }
+    }
+
+    public void RebindingClicked()
+    {
+        ControlsManager.Instance.StartRebindingOperation(actionPath);
     }
 }

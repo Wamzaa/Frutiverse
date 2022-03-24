@@ -15,6 +15,20 @@ public class ControlsData
     public string moveLeftKeyboardKey;
     public string moveRightKeyboardKey;
     public string moveGamepadKey;
+
+    public ControlsData()
+    {
+        jumpKeys = new ActionKeys();
+        attackKeys = new ActionKeys();
+        interactKeys = new ActionKeys();
+        menuKeys = new ActionKeys();
+        inventoryKeys = new ActionKeys();
+
+        moveGamepadKey = "";
+        moveLeftKeyboardKey = "";
+        moveRightKeyboardKey = "";
+
+    }
 }
 
 [Serializable]
@@ -22,4 +36,10 @@ public class ActionKeys
 {
     public string keyboardKey;
     public string gamepadKey;
+
+    public ActionKeys()
+    {
+        keyboardKey = "";
+        gamepadKey = "";
+    }
 }
