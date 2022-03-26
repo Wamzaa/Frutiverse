@@ -31,6 +31,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void InteractFromInput()
     {
+        Debug.Log("Count ---  " + interactableObjects.Count);
         foreach(GameObject obj in interactableObjects)
         {
             obj.GetComponent<InteractableCharacter>().Interact();

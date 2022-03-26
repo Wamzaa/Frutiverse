@@ -63,7 +63,10 @@ public class MainManager : MonoBehaviour
 
     public void Jump()
     {
-        player.GetComponent<PlayerMovement>().JumpFromInput();
+        if (canMove)
+        {
+            player.GetComponent<PlayerMovement>().JumpFromInput();
+        }
     }
 
     public void Attack()
@@ -79,13 +82,17 @@ public class MainManager : MonoBehaviour
     public float GetMove()
     {
         ControlsManager controlsManager = this.gameObject.GetComponent<ControlsManager>();
-        return (controlsManager.GetMove());
+        if (canMove)
+        {
+            return (controlsManager.GetMove());
+        }
+        return (0.0f);
     }
 
     public void Move(float _movementInput)
     {
         float horizontalMovement = 0.0f;
-        if (GetCanMove())
+        if (canMove)
         {
             horizontalMovement = _movementInput;
         }

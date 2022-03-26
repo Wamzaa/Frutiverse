@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  jumpForce: 2000
+  jumpForce: 16
   groundDetectorTransform: {fileID: 940840291167641355}
   groundDetectorRadius: 0.4
 --- !u!114 &4780468400966604543

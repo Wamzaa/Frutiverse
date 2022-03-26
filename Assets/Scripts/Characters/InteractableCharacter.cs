@@ -7,14 +7,26 @@ public class InteractableCharacter : MonoBehaviour
     public float interactDistance;
     public GameObject interactIndication;
 
-    private void Update()
+    private void Start()
     {
-        if((MainManager.Instance.player.transform.position - this.transform.position).magnitude < interactDistance)
+        CircleCollider2D collider = this.gameObject.AddComponent<CircleCollider2D>();
+        collider.offset = Vector2.zero;
+        collider.radius = interactDistance;
+        collider.isTrigger = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
             interactIndication.SetActive(true);
             MainManager.Instance.player.GetComponent<PlayerInteraction>().AddInteractableObject(this.gameObject);
         }
-        else
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
             interactIndication.SetActive(false);
             MainManager.Instance.player.GetComponent<PlayerInteraction>().RemoveInteractableObject(this.gameObject);
