@@ -21,8 +21,6 @@ public class MenuManager : MonoBehaviour
     {
         GameObject player = Instantiate(Resources.Load<GameObject>("Player"));
         DontDestroyOnLoad(player);
-        GameObject mainManager = Instantiate(Resources.Load<GameObject>("MainManager"));
-        DontDestroyOnLoad(mainManager);
         GameObject uiManager = Instantiate(Resources.Load<GameObject>("UIManager"));
         DontDestroyOnLoad(uiManager);
 

@@ -30,16 +30,16 @@ public class UIManager : MonoBehaviour
         speechVisible = false;
     }
 
-    private void Update()
+    public void OpenWindowFromInputs(int window)
     {
-        /*if (Input.GetKeyDown(ControlsDictionary.Instance.inventoryButtonKey))
+        if(window == 0)
+        {
+            OpenMenu(!menuVisible);
+        }
+        else
         {
             OpenInventory(!inventoryVisible);
         }
-        if (Input.GetKeyDown(ControlsDictionary.Instance.menuButtonKey))
-        {
-            OpenMenu(!menuVisible);
-        }*/
     }
 
     public bool GetSpeechVisible()

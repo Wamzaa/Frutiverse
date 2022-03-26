@@ -9,15 +9,18 @@ public class MainManager : MonoBehaviour
 
     public GameObject player;
     public UIManager uiManager;
+
     public int maxHealth;
 
+    // Gameplay variables
     [HideInInspector]
     public int currentHealth;
-
     [HideInInspector]
     public int currentMoney;
 
+    // Input values
     private bool canMove;
+    private int currentController;
 
     private void Awake()
     {
@@ -36,8 +39,10 @@ public class MainManager : MonoBehaviour
         currentHealth = maxHealth;
         currentMoney = 0;
         canMove = true;
-        DontDestroyOnLoad(this);
+        currentController = 0;
     }
+
+    // Getter - Setter
 
     public bool GetCanMove()
     {
@@ -48,6 +53,61 @@ public class MainManager : MonoBehaviour
     {
         canMove = _canMove;
     }
+
+    public void SetCurrentController(int newController)
+    {
+        currentController = newController;
+    }
+
+    // Input Callbacks
+
+    public void Jump()
+    {
+        player.GetComponent<PlayerMovement>().JumpFromInput();
+    }
+
+    public void Attack()
+    {
+        player.GetComponent<PlayerInteraction>().AttackFromInput();
+    }
+
+    public void Interact()
+    {
+        player.GetComponent<PlayerInteraction>().InteractFromInput();
+    }
+
+    public float GetMove()
+    {
+        ControlsManager controlsManager = this.gameObject.GetComponent<ControlsManager>();
+        return (controlsManager.GetMove());
+    }
+
+    public void Move(float _movementInput)
+    {
+        float horizontalMovement = 0.0f;
+        if (GetCanMove())
+        {
+            horizontalMovement = _movementInput;
+        }
+        PlayerMovement.Instance.SetHorizontalMovement(horizontalMovement);
+    }
+
+    public void OpenInventory()
+    {
+        uiManager.OpenWindowFromInputs(1);
+    }
+
+    public void OpenMenu()
+    {
+        uiManager.OpenWindowFromInputs(0);
+    }
+
+    public void ResetInput()
+    {
+
+    }
+
+    // Scene Management
 
     public void ChangeScene(string sceneName, int spawnId)
     {
@@ -70,9 +130,12 @@ public class MainManager : MonoBehaviour
         yield return asyncOp;
 
         Destroy(player);
+        player = null;
         Destroy(uiManager.gameObject);
-        Destroy(this.gameObject);
+        uiManager = null;
     }
+
+    // Gameplay Callbacks
 
     public void TakeDamage(int damage)
     {

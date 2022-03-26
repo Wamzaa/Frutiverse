@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Weapon"))
         {
-            TakeDamage(10);
+            TakeDamage(1);
         }
 
         if (collision.gameObject.CompareTag("Player"))

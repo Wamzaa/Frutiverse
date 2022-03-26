@@ -7,20 +7,42 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject weapon;
 
     private bool isAttacking;
+    private List<GameObject> interactableObjects;
 
     private void Start()
     {
         isAttacking = false;
         weapon.SetActive(false);
+        interactableObjects = new List<GameObject>();
     }
 
-    private void Update()
+    public void AddInteractableObject(GameObject obj)
     {
-        /*bool attackInput = Input.GetKeyDown(ControlsDictionary.Instance.attackButtonKey);
-        if(!isAttacking && attackInput)
+        interactableObjects.Add(obj);
+    }
+
+    public void RemoveInteractableObject(GameObject obj)
+    {
+        if (interactableObjects.Contains(obj))
+        {
+            interactableObjects.Remove(obj);
+        }
+    }
+
+    public void InteractFromInput()
+    {
+        foreach(GameObject obj in interactableObjects)
+        {
+            obj.GetComponent<InteractableCharacter>().Interact();
+        }
+    }
+
+    public void AttackFromInput()
+    {
+        if (!isAttacking)
         {
             StartCoroutine(Attack());
-        }*/
+        }
     }
 
     IEnumerator Attack()

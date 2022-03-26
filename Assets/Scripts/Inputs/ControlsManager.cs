@@ -41,125 +41,12 @@ public class ControlsManager : MonoBehaviour
 
     public string GetActionPath(string actionDefinition)
     {
-        if (actionDefinition == "jump-keyboard")
-        {
-            return (controlsData.jumpKeys.keyboardKey);
-        }
-        if (actionDefinition == "jump-gamepad")
-        {
-            return (controlsData.jumpKeys.gamepadKey);
-        }
-
-        if (actionDefinition == "attack-keyboard")
-        {
-            return (controlsData.attackKeys.keyboardKey);
-        }
-        if (actionDefinition == "attack-gamepad")
-        {
-            return (controlsData.attackKeys.gamepadKey);
-        }
-
-        if (actionDefinition == "interact-keyboard")
-        {
-            return (controlsData.interactKeys.keyboardKey);
-        }
-        if (actionDefinition == "interact-gamepad")
-        {
-            return (controlsData.interactKeys.gamepadKey);
-        }
-
-        if (actionDefinition == "menu-keyboard")
-        {
-            return (controlsData.menuKeys.keyboardKey);
-        }
-        if (actionDefinition == "menu-gamepad")
-        {
-            return (controlsData.menuKeys.gamepadKey);
-        }
-
-        if (actionDefinition == "inventory-keyboard")
-        {
-            return (controlsData.inventoryKeys.keyboardKey);
-        }
-        if (actionDefinition == "inventory-gamepad")
-        {
-            return (controlsData.inventoryKeys.gamepadKey);
-        }
-
-        if (actionDefinition == "moveLeft-keyboard")
-        {
-            return (controlsData.moveLeftKeyboardKey);
-        }
-        if (actionDefinition == "moveRight-keyboard")
-        {
-            return (controlsData.moveRightKeyboardKey);
-        }
-        if (actionDefinition == "move-gamepad")
-        {
-            return (controlsData.moveGamepadKey);
-        }
-        return ("");
+        return controlsData.GetActionPath(actionDefinition);
     }
 
     public void SetActionPath(string actionDefinition, string newBinding)
     {
-        if (actionDefinition == "jump-keyboard")
-        {
-            controlsData.jumpKeys.keyboardKey = newBinding;
-        }
-        if (actionDefinition == "jump-gamepad")
-        {
-            controlsData.jumpKeys.gamepadKey = newBinding;
-        }
-
-        if (actionDefinition == "attack-keyboard")
-        {
-            controlsData.attackKeys.keyboardKey = newBinding;
-        }
-        if (actionDefinition == "attack-gamepad")
-        {
-            controlsData.attackKeys.gamepadKey = newBinding;
-        }
-
-        if (actionDefinition == "interact-keyboard")
-        {
-            controlsData.interactKeys.keyboardKey = newBinding;
-        }
-        if (actionDefinition == "interact-gamepad")
-        {
-            controlsData.interactKeys.gamepadKey = newBinding;
-        }
-
-        if (actionDefinition == "menu-keyboard")
-        {
-            controlsData.menuKeys.keyboardKey = newBinding;
-        }
-        if (actionDefinition == "menu-gamepad")
-        {
-            controlsData.menuKeys.gamepadKey = newBinding;
-        }
-
-        if (actionDefinition == "inventory-keyboard")
-        {
-            controlsData.inventoryKeys.keyboardKey = newBinding;
-        }
-        if (actionDefinition == "inventory-gamepad")
-        {
-            controlsData.inventoryKeys.gamepadKey = newBinding;
-        }
-
-        if (actionDefinition == "moveLeft-keyboard")
-        {
-            controlsData.moveLeftKeyboardKey = newBinding;
-        }
-        if (actionDefinition == "moveRight-keyboard")
-        {
-            controlsData.moveRightKeyboardKey = newBinding;
-        }
-        if (actionDefinition == "move-gamepad")
-        {
-            controlsData.moveGamepadKey = newBinding;
-        }
+        controlsData.SetActionPath(actionDefinition, newBinding);
     }
 
     #endregion
@@ -178,19 +65,19 @@ public class ControlsManager : MonoBehaviour
 
         FillKeysFromJson();
 
-        playerControls.Gameplay.MoveLeftKeyboard.performed += (ctx => Move(1.0f));
-        playerControls.Gameplay.MoveRightKeyboard.performed += (ctx => Move(-1.0f));
-        playerControls.Gameplay.MoveGamepad.performed += (ctx => Move(ctx.ReadValue<Vector2>().x));
+        playerControls.Gameplay.MoveLeftKeyboard.performed += (ctx => Move(1.0f, ctx.control.path));
+        playerControls.Gameplay.MoveRightKeyboard.performed += (ctx => Move(-1.0f, ctx.control.path));
+        playerControls.Gameplay.MoveGamepad.performed += (ctx => Move(ctx.ReadValue<Vector2>().x, ctx.control.path));
 
         playerControls.Gameplay.Jump.performed += (ctx => Jump(ctx.control.path));
 
-        playerControls.Gameplay.Interact.performed += (ctx => Interact());
+        playerControls.Gameplay.Interact.performed += (ctx => Interact(ctx.control.path));
 
-        playerControls.Gameplay.Attack.performed += (ctx => Attack());
+        playerControls.Gameplay.Attack.performed += (ctx => Attack(ctx.control.path));
 
-        playerControls.Gameplay.OpenInventory.performed += (ctx => OpenInventory());
+        playerControls.Gameplay.OpenInventory.performed += (ctx => OpenInventory(ctx.control.path));
 
-        playerControls.Gameplay.OpenMenu.performed += (ctx => OpenMenu());
+        playerControls.Gameplay.OpenMenu.performed += (ctx => OpenMenu(ctx.control.path));
     }
 
     public void FillKeysFromJson()
@@ -400,34 +287,69 @@ public class ControlsManager : MonoBehaviour
 
     #region Callbacks
 
-    public void Move(float value)
+    public void Move(float value, string ctxPath)
     {
-        Debug.Log("Move : " + value);
+        /*SetMainController(ctxPath);
+        //Debug.Log("Move : " + value);
+        MainManager.Instance.Move(value);*/
     }
 
-    public void Jump(string value)
+    public float GetMove()
     {
-        Debug.Log("Jump !!! " + value);
+        float move = -playerControls.Gameplay.MoveLeftKeyboard.ReadValue<float>() + playerControls.Gameplay.MoveRightKeyboard.ReadValue<float>();
+        if(move == 0)
+        {
+            move = playerControls.Gameplay.MoveGamepad.ReadValue<Vector2>().x;
+        }
+        return move;
     }
 
-    public void Interact()
+    public void Jump(string ctxPath)
     {
+        SetMainController(ctxPath);
+        Debug.Log("Jump !!! " + ctxPath);
+        MainManager.Instance.Jump();
+    }
+
+    public void Interact(string ctxPath)
+    {
+        SetMainController(ctxPath);
         Debug.Log("Interact");
+        MainManager.Instance.Interact();
     }
 
-    public void Attack()
+    public void Attack(string ctxPath)
     {
+        SetMainController(ctxPath);
         Debug.Log("Attack !!! ");
+        MainManager.Instance.Attack();
     }
 
-    public void OpenInventory()
+    public void OpenInventory(string ctxPath)
     {
+        SetMainController(ctxPath);
         Debug.Log("OpenInventory");
+        MainManager.Instance.OpenInventory();
     }
 
-    public void OpenMenu()
+    public void OpenMenu(string ctxPath)
     {
+        SetMainController(ctxPath);
         Debug.Log("OpenMenu");
+        MainManager.Instance.OpenMenu();
+    }
+
+    public void SetMainController(string value)
+    {
+        string controller = value.Replace("<", "").Replace(">", "").Split('/')[0];
+        if(controller == "Keyboard")
+        {
+            MainManager.Instance.SetCurrentController(0);
+        }
+        else if(controller == "Gamepad")
+        {
+            MainManager.Instance.SetCurrentController(1);
+        }
     }
 
     #endregion

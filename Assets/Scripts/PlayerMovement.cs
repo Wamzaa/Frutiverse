@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
+
     public float moveSpeed;
     public float jumpForce;
 
@@ -19,32 +21,43 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     private LayerMask groundDetectorMask;
 
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.Log("Already instanciated");
+        }
+    }
+
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
         groundDetectorMask = LayerMask.GetMask("Default");
-
-        DontDestroyOnLoad(this);
-        MainManager.Instance.player = this.gameObject;
     }
+
+    public void SetHorizontalMovement(float hMove)
+    {
+        horizontalMovement = hMove * moveSpeed;
+    }
+
+    public void JumpFromInput()
+    {
+        isOnGround = Physics2D.OverlapCircle(groundDetectorTransform.position, groundDetectorRadius, groundDetectorMask);
+        if (isOnGround)
+        {
+            isJumping = true;
+        }
+    }
+
 
     private void Update()
     {
-        if (MainManager.Instance.GetCanMove())
-        {
-            horizontalMovement = Input.GetAxis("Horizontal") * moveSpeed;
-        }
-        else
-        {
-            horizontalMovement = 0.0f;
-        }
-
-        isOnGround = Physics2D.OverlapCircle(groundDetectorTransform.position, groundDetectorRadius, groundDetectorMask); 
-        /*if (Input.GetKeyDown(ControlsDictionary.Instance.jumpButtonKey) && isOnGround)
-        {
-            isJumping = true;
-        }*/
-
+        isOnGround = Physics2D.OverlapCircle(groundDetectorTransform.position, groundDetectorRadius, groundDetectorMask);
+        horizontalMovement = MainManager.Instance.GetMove() * moveSpeed;
         if (!isOnGround)
         {
             float jumpDirCoeff = 0.3f;
